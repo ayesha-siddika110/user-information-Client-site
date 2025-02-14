@@ -74,7 +74,7 @@ const Home = () => {
                 )}
             </div>
 
-            <div className="grid grid-cols-4 w-[90%] m-auto gap-4 mt-5">
+            <div className="grid 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 w-[90%] m-auto gap-4 mt-5">
                 {data?.map((item, index) => (
                     <Card item={item} key={index} />
                 ))}
