@@ -4,6 +4,7 @@
 import { FaArrowLeft } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
+import axios from 'axios';
 // import useAuth from '../../Hooks/useAuth';
 // import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
@@ -17,15 +18,16 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const onSubmit = async (data) => {
 
-        console.log(data);
+        
 
         // image hosting 
         const imageFile = { image: data.image[0] }
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+        const res = await axios.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         });
+        console.log(data, res.data.data.display_url);
 
         // signUpWithEmail(data?.email, data?.password)
         //     .then(response => {
