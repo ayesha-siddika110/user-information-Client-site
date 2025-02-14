@@ -13,7 +13,7 @@ A modern web application where users can view all registered users, search for s
 ## 🛠️ Tech Stack
 
 - **Frontend:** React 19, React Router v7
-- **Backend:** Firebase
+- **Backend:** Firebase, mongodb, express js, JWT, morgan,node js
 - **HTTP Requests:** Axios
 - **Form Handling:** React Hook Form
 - **Icons:** React Icons
