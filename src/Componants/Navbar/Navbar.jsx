@@ -28,7 +28,7 @@ const Navbar = () => {
                     </div>
                     <div className="drawer-side z-50">
                         <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className={`bg-[#033B4C]  mt-[80px]   lg:w-[30%] md:w-[30%] w-[90%]  p-4  flex flex-col justify-center items-center`}>
+                        <ul className={`bg-sky-800  mt-[80px]   lg:w-[30%] md:w-[30%] w-[90%]  p-4  flex flex-col justify-center items-center`}>
                             <img src={user?.photoURL} alt="Profile" className="border md:w-20 md:h-20 w-8 h-8 rounded-full" />
                             <li onClick={handleSignOut} className="py-3 my-7 cursor-pointer w-full border-y text-white flex items-center gap-4"><FaArrowLeft></FaArrowLeft>Log Out</li>
 
