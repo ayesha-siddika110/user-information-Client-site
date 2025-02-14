@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { FaArrowLeft } from 'react-icons/fa';
+import animation from "../../assets/login-regis.json";
+import Lottie from 'lottie-react';
 
 const Login = () => {
 
@@ -35,7 +37,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className=' bg-sky-200  lg:m-6 md:w-[50%] w-[90%] lg:w-[40%]  lg:p-10 p-5 space-y-3 border'>
                     <div className=' pl-[5%]'>
 
-                        <Link className='cursor-pointer w-20  bg-[#0693be48] flex items-center py-2 px-2 gap-2' to="/"> <FaArrowLeft /> Home</Link>
+                        <Link className='cursor-pointer w-20  bg-sky-700 flex items-center py-2 px-2 gap-2' to="/"> <FaArrowLeft /> Home</Link>
                     </div>
                     <p className='text-4xl text-center text-black font-semibold'>Login Now!</p>
                   
@@ -65,7 +67,9 @@ const Login = () => {
                     {/* <SocialLogin></SocialLogin> */}
                     <Link to="/register" className='hover:underline text-black flex'>New User ? please  <p className='pl-2 font-semibold'> Register</p></Link>
                 </form>
-                <div className='w-[50%] hidden lg:flex'></div>
+                <div className='w-[50%] hidden lg:flex'>
+                <Lottie animationData={animation} loop={true} />
+                </div>
 
 
             </div>

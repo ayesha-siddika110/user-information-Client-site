@@ -8,6 +8,8 @@ import axios from 'axios';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import animation from '../../assets/login-regis.json'
+import Lottie from 'lottie-react';
 
 // import useAuth from '../../Hooks/useAuth';
 
@@ -22,7 +24,7 @@ const Register = () => {
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const onSubmit = async (data) => {
-        
+
         // image hosting 
         const imageFile = { image: data.image[0] }
         const res = await axios.post(image_hosting_api, imageFile, {
@@ -111,7 +113,7 @@ const Register = () => {
                         </div>
                         {errors.userName && <span className='text-red-600'>This field is required</span>}
                         {/* photo & gender */}
-                        <div className='flex items-center gap-4'>
+                        <div className='md:flex items-center gap-4'>
                             <div className='form-control'>
                                 <label htmlFor="" className="text-black   pb-2" >Upload Image *</label>
                                 <input
@@ -132,7 +134,7 @@ const Register = () => {
 
                             {errors.image && <span className='text-red-600'>This field is required</span>}
                         </div>
-                        <div className='flex items-center gap-4'>
+                        <div className='md:flex items-center gap-4'>
                             {/* date of birth */}
                             <div className='form-control'>
                                 <p className='text-black'>Date Of birth *</p>
@@ -178,7 +180,9 @@ const Register = () => {
                         {/* <SocialLogin></SocialLogin> */}
                         <Link to="/login" className='hover:underline text-black flex'>Already have an Account ? please  <p className='pl-2 font-semibold'> Login</p></Link>
                     </form>
-                    <div className='w-[50%] hidden lg:flex'></div>
+                    <div className='w-[50%] hidden lg:flex'>
+                    <Lottie animationData={animation} loop={true} />
+                    </div>
 
 
                 </div>

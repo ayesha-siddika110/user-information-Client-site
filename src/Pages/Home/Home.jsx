@@ -79,6 +79,9 @@ const Home = () => {
                     <Card item={item} key={index} />
                 ))}
             </div>
+            <div>
+                {data?.length == 0 && <p className="text-center font-semibold text-3xl text-gray-600 pt-32">No User Matches</p>}
+            </div>
         </div>
     );
 };
