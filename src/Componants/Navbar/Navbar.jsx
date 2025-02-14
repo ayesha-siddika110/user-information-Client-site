@@ -1,7 +1,8 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import PrimaryButton from "../Primaributton/PrimaryButton";
 import useAuth from "../../Hooks/useAuth";
 import { FaArrowLeft } from "react-icons/fa";
+import './Navbar.css'
 
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
         signOutUser()
     }
     const linkes = <>
-        <Link to="/">Home</Link>
+        <NavLink to="/" className={`text-lg text-center`}>Home</NavLink>
     </>
 
     const profile = <>
@@ -36,7 +37,10 @@ const Navbar = () => {
                 </div>
             </>
                 :
+                <div className="flex items-center gap-4">
                 <Link to="/register"><PrimaryButton text={"Register"}></PrimaryButton></Link>
+                <Link to="/login"><PrimaryButton text={"Login"}></PrimaryButton></Link>
+                </div>
         }
 
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const card = ({item}) => {
-    console.log(item);
+    // console.log(item);
     const {photo, Gender, country, userName,
         fullName} = item || {}
     
