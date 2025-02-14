@@ -1,25 +1,28 @@
-// import { Link, useNavigate } from 'react-router-dom';
+
 
 // import SocialLogin from '../../Share/SocialLogin/SocialLogin';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useAuth from '../../Hooks/useAuth';
+import toast from 'react-hot-toast';
+
 // import useAuth from '../../Hooks/useAuth';
-// import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const Register = () => {
-    const navigate = useNavigate()
+
+
     const image_hosting_key = import.meta.env.VITE_ImageBB_apiKey;
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-    // const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic()
 
-    // const { updateProfileData, signUpWithEmail } = useAuth()
+    const { signUpUser, updateProfileData } = useAuth()
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, } = useForm()
     const onSubmit = async (data) => {
-
         
-
         // image hosting 
         const imageFile = { image: data.image[0] }
         const res = await axios.post(image_hosting_api, imageFile, {
@@ -27,47 +30,54 @@ const Register = () => {
                 'content-type': 'multipart/form-data'
             }
         });
-        console.log(data, res.data.data.display_url);
+        signUpUser(data?.email, data?.password)
+            .then(response => {
+                // console.log(response)
 
-        // signUpWithEmail(data?.email, data?.password)
-        //     .then(response => {
-        //         // console.log(response)
+                const updateDatas = {
+                    displayName: data?.name,
+                    photoURL: res.data.data.display_url
+                }
+                // console.log(updateDatas);
 
-        //         const updateDatas = {
-        //             displayName: data?.name,
-        //             photoURL: res.data.data.display_url
-        //         }
-        //         // updateProfileData(updateDatas)
-        //         //     .then(response => {
-        //         //         // console.log(response);
-        //         //         const userData = {
-        //         //             userName: data?.name,
-        //         //             email: data?.email,
-        //         //             photo: res.data.data.display_url,
-        //         //             role: data?.category
-        //         //         }
-        //         //         // console.log(userData);
+                updateProfileData(updateDatas)
+                    .then(response => {
+                        const userData = {
+                            fullName: data.name,
+                            userName: data?.userName,
+                            Gender: data?.Gender,
+                            country: data?.country,
+                            email: data?.email,
+                            dateOfBirth: data?.dateOfBirth,
+                            photo: res.data.data.display_url,
 
-        //         //         axiosPublic.post(`/users/${data?.email}`, userData)
-        //         //             .then(res => {
-        //         //                 // console.log(res.data);
-        //         //                 if (res.data.insertedId) {
-        //         //                     toast.success('Successfully Register & save to database')
-        //         //                 }
+                        }
+                        console.log(userData);
 
-        //         //             })
-        //         //         navigate('/')
+                        axiosPublic.post(`/users`, userData)
+                            .then(res => {
+                                console.log(res.data);
+                                if (res.data.insertedId) {
+                                    toast.success('Successfully Register & save to database')
+                                    navigate("/")
+                                }
+                                
 
-        //         //     })
-        //         //     .catch(err => {
-        //         //         console.log(err);
+                            })
 
-        //         //     })
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
 
-        //     })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        toast.error(err.message)
+
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error(err.message)
+
+            })
 
     }
     return (

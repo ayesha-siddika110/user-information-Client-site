@@ -1,14 +1,47 @@
 import { Link } from "react-router";
 import PrimaryButton from "../Primaributton/PrimaryButton";
-import Register from "../../Pages/register/Register";
+import useAuth from "../../Hooks/useAuth";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 const Navbar = () => {
+    const { user ,signOutUser} = useAuth()
+    const handleSignOut =()=>{
+        signOutUser()
+    }
     const linkes = <>
         <Link to="/">Home</Link>
     </>
+
+    const profile = <>
+
+        {
+            user ? <>
+                <div className="drawer drawer-end">
+
+                    <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+                    <div className="drawer-content ">
+                        {/* Page content here */}
+                        <label htmlFor="my-drawer-4" className="drawer-button ">
+                            <img src={user?.photoURL} alt="Profile" className="border md:w-12 md:h-12 w-8 h-8 rounded-full" /></label>
+                    </div>
+                    <div className="drawer-side z-50">
+                        <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
+                        <ul className={`bg-[#033B4C]  mt-[80px]   lg:w-[30%] md:w-[30%] w-[90%]  p-4  flex flex-col justify-center items-center`}>
+                            <img src={user?.photoURL} alt="Profile" className="border md:w-20 md:h-20 w-8 h-8 rounded-full" />
+                            <li onClick={handleSignOut} className="py-3 my-7 cursor-pointer w-full border-y text-white flex items-center gap-4"><FaArrowLeft></FaArrowLeft>Log Out</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </>
+                :
+                <Link to="/register"><PrimaryButton text={"Register"}></PrimaryButton></Link>
+        }
+
+    </>
     return (
-        <div className="bg-sky-100">
+        <div className="bg-sky-100 py-2">
             <div className="navbar  w-[90%] m-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -40,7 +73,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/register"><PrimaryButton text={"Register"}></PrimaryButton></Link>
+                    <div>{profile}</div>
                 </div>
             </div>
 
