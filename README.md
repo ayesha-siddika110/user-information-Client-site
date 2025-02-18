@@ -2,6 +2,8 @@
 
 A modern web application where users can view all registered users, search for specific users, and interact seamlessly. Built using **React 19, Firebase, Axios, and React Router v7**.
 
+Live site Link : [https://people-view.netlify.app/]
+
 ## 🚀 Features
 
 - 🔍 **User Search** - Quickly find users by name.
